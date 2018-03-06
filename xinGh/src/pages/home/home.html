@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title pull left>Select A Cinema</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-image:url('assets/img/bk.jpg');">
+  <ion-row>
+        <ion-slides autoplay="5000" class="slideroption" loop="true" speed="300" > 
+            <ion-slide *ngFor="let item of movies" >
+                  <img src="{{item.posterUrl}}" style="min-height:40%;height:300px;width:100%" />
+            </ion-slide>
+          </ion-slides>
+  </ion-row>
+  
+<ion-row style="margin-top:-7px">
+  <ion-list style="border-color: rgba(0, 0, 0, 0);background-color: rgba(0, 0, 0, 0);">
+    <ion-item *ngFor="let house of houses" (click)="goToHouseMovies(house)">
+      <ion-avatar item-start>
+        <img src="assets/img/bk.jpg" style="height:100px;width:100px">
+      </ion-avatar>
+      <h2 style="color:#ffb300;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><strong>{{house.name}}</strong></h2>
+      <h3 style="color:#ffb300;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><b>{{house.location}}</b></h3>
+    </ion-item>
+  </ion-list>
+</ion-row>
+  
+</ion-content>

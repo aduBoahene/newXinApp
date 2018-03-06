@@ -1,0 +1,56 @@
+<!--
+  Generated template for the ViewOneCinemaMoviesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{movieFromPreviousPage?.name}}</ion-title>
+  </ion-navbar>
+  
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-row padding>
+      <h4>Coming Soon</h4>
+        <ion-slides autoplay="5000" slidesPerView= 3  spaceBetween= 2 class="slideroption" loop="true" speed="300" > 
+            <ion-slide *ngFor="let item of movies" (click)="goToOneMovie(item)">
+
+                <ion-card>
+                     <!-- <ion-card-content> -->
+                        <img src="{{item.posterUrl}}" style="height:150px;width:100px"/>
+                     <!-- </ion-card-content> -->
+                     <ion-row class="cardfooter">
+                       <ion-col>
+                             <p style="word-wrap:normal">{{item.name}}</p>
+                       </ion-col>
+                     </ion-row>
+                   </ion-card>
+
+
+                  
+            </ion-slide>
+          </ion-slides>
+  </ion-row>
+
+  <ion-row>
+      <h4 padding>Showing Today</h4>
+
+      <ion-list>
+          <ion-item *ngFor="let item of movies" (click)="goToOneMovie(item)">
+                <ion-thumbnail item-start>
+                    <img src="{{item.posterUrl}}">
+                  </ion-thumbnail>
+                  <h2>{{item.name}}</h2>
+                  <p>Hayao Miyazaki • 1988</p>
+                  <button ion-button clear item-end>View</button>
+          </ion-item>
+        </ion-list>
+  </ion-row>
+
+</ion-content>
