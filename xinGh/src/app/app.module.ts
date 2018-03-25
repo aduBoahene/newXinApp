@@ -1,3 +1,4 @@
+import { BookingPage } from './../pages/booking/booking';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -17,6 +18,11 @@ import { ViewOneCinemaMoviesPage } from '../pages/view-one-cinema-movies/view-on
 import { ViewMovieTrailerPage } from '../pages/view-movie-trailer/view-movie-trailer';
 import { RegisterPage } from '../pages/register/register';
 import { AllMoviesPage } from '../pages/all-movies/all-movies';
+import { MovieProvider } from '../providers/movie/movie';
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -31,9 +37,12 @@ import { AllMoviesPage } from '../pages/all-movies/all-movies';
     ViewOneCinemaMoviesPage,
     ViewMovieTrailerPage,
     RegisterPage,
-    AllMoviesPage
+    AllMoviesPage,
+    BookingPage
   ],
   imports: [
+    HttpModule,
+    HttpClientModule,
     BrowserModule,
     //IonicModule.forRoot(MyApp),
     IonicModule.forRoot(MyApp,{
@@ -55,12 +64,14 @@ import { AllMoviesPage } from '../pages/all-movies/all-movies';
     ViewOneCinemaMoviesPage,
     ViewMovieTrailerPage,
     RegisterPage,
-    AllMoviesPage
+    AllMoviesPage,
+    BookingPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MovieProvider
   ]
 })
 export class AppModule {}

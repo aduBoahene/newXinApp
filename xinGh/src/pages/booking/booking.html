@@ -1,0 +1,77 @@
+<!--
+  Generated template for the BookingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Booking</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <form (ngSubmit)="logForm()">
+        <ion-item>
+          <ion-label floating>Title</ion-label>
+          <ion-input [disabled]="true" type="text" [(ngModel)]="todo.title" name="title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Amount</ion-label>
+            <ion-textarea [disabled]="true" [(ngModel)]="todo.amount" name="amount"></ion-textarea>
+          </ion-item>
+        <ion-item>
+            <ion-label floating>Time</ion-label>
+            <ion-select [(ngModel)]="todo.time" name="time">
+              <ion-option *ngFor="let time of times" [value]="time.ShowMomentId">
+                {{time.Time}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label floating>Payment Method</ion-label>
+              <ion-select [(ngModel)]="todo.payment" name="payment">
+                <ion-option value="f">MTN Mobile Money</ion-option>
+                <ion-option value="m">Tigo Cash</ion-option>
+              </ion-select>
+            </ion-item>
+        <ion-item>
+          <ion-label floating>Full Name</ion-label>
+          <ion-textarea [(ngModel)]="todo.fullName" name="fullName"></ion-textarea>
+        </ion-item>
+        <button ion-button type="submit" block>Send</button>
+      </form>
+
+    <!-- <form [formGroup]="bookingDetails" (ngSubmit)="logForm()"> 
+        <ion-item>
+          <ion-label floating floating>Movie Title</ion-label>
+          <ion-input type="text" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Time</ion-label>
+            <ion-select formControlName="time">
+              <ion-option *ngFor="let time of times" [value]="time.ShowMomentId">
+                {{time.Time}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+        <ion-item>
+            <ion-label floating>Payment Method</ion-label>
+            <ion-select formControlName="payment">
+              <ion-option value="f">MTN Mobile Money</ion-option>
+              <ion-option value="m">Tigo Cash</ion-option>
+            </ion-select>
+          </ion-item>
+        <ion-item>
+          <ion-label floating>Full Name</ion-label>
+          <ion-textarea formControlName="custName"></ion-textarea>
+        </ion-item>
+        
+        <button full ion-button type="submit">Submit</button>
+      </form>-->
+
+</ion-content>

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{movieFromPreviousPage?.name}}</ion-title>
+    <ion-title>{{movieFromPreviousPage?.HouseName}}</ion-title>
   </ion-navbar>
   
 
@@ -19,37 +19,36 @@
     <ion-row padding>
       <h4>Coming Soon</h4>
         <ion-slides autoplay="5000" slidesPerView= 3  spaceBetween= 2 class="slideroption" loop="true" speed="300" > 
-            <ion-slide *ngFor="let item of movies" (click)="goToOneMovie(item)">
+            <ion-slide *ngFor="let item of movies">
 
                 <ion-card>
-                     <!-- <ion-card-content> -->
-                        <img src="{{item.posterUrl}}" style="height:150px;width:100px"/>
-                     <!-- </ion-card-content> -->
+                        <img src="{{item?.posterUrl}}" style="height:150px;width:150px"/>
                      <ion-row class="cardfooter">
-                       <ion-col>
-                             <p style="word-wrap:normal">{{item.name}}</p>
+                       <ion-col style="height:100px">
+                             <p style="word-wrap:breaks-all">{{item?.name}}</p><br>
                        </ion-col>
                      </ion-row>
                    </ion-card>
 
-
-                  
             </ion-slide>
           </ion-slides>
   </ion-row>
 
   <ion-row>
-      <h4 padding>Showing Today</h4>
-
       <ion-list>
-          <ion-item *ngFor="let item of movies" (click)="goToOneMovie(item)">
+          <h4 padding>Showing Today</h4>
+          <ion-card *ngFor="let item of moviesN" (click)="goToOneMovie(item)" style="width:100%">
+          <ion-item >
                 <ion-thumbnail item-start>
-                    <img src="{{item.posterUrl}}">
+                    <img src="{{item?.PosterUrl}}">
                   </ion-thumbnail>
-                  <h2>{{item.name}}</h2>
-                  <p>Hayao Miyazaki • 1988</p>
-                  <button ion-button clear item-end>View</button>
+                  <h2>{{item?.Title}}</h2>
+                  <p>{{item?.GenreName}}</p>
+                  <p>GHC{{item?.Amount}}</p>
+                  <button ion-button item-end round>View</button>
+                
           </ion-item>
+        </ion-card>
         </ion-list>
   </ion-row>
 

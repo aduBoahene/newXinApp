@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewOneCinemaMoviePage } from '../view-one-cinema-movie/view-one-cinema-movie';
 
+import { Http} from '@angular/http';
+
 /**
  * Generated class for the ViewOneCinemaMoviesPage page.
  *
@@ -18,8 +20,11 @@ export class ViewOneCinemaMoviesPage {
   movieFromPreviousPage:any
 
   movies:any
+  moviesN:any
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  times:any
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http) {
 
     this.movieFromPreviousPage=this.navParams.get('house')
 
@@ -57,14 +62,14 @@ export class ViewOneCinemaMoviesPage {
       }
     ]
 
+    console.log("movies on top", this.movies)
+
+    this.getMoviesByHouse(this.movieFromPreviousPage.HouseId)
+    //this.getTimesOFMovies(this.movieFromPreviousPage.HouseId)
   }
 
 
-  // goToOneMovie(movie){
-  //   this.navCtrl.push(ViewOneCinemaMoviePage,{
-  //     'movieTobeViewed':movie
-  //   })
-  // }
+ 
 
 
   goToOneMovie(movie){
@@ -73,7 +78,19 @@ export class ViewOneCinemaMoviesPage {
     })
   }
 
+  getMoviesByHouse(houseId){
+    return this.http.get("http://localhost:27036/api/Movie/GetAllMovie?houseId="+houseId)
+    .map(res=>res.json())
+    .subscribe(data =>{
+      this.moviesN = data
+      console.log("all movies for",this.moviesN)
 
+      //this.getTimesOFMovies(this.movieFromPreviousPage.HouseId)
+    })
+  }
+
+
+  
   
 
 }

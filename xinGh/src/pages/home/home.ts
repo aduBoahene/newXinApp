@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ViewOneCinemaMoviesPage } from '../view-one-cinema-movies/view-one-cinema-movies';
 
+import { Http} from '@angular/http';
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,37 +14,14 @@ export class HomePage {
   movies:any
   houses:any
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public http:Http) {
   }
 
 
   ionViewDidLoad(){
     console.log("hellloooooo")
 
-    
-
-    this.houses=[
-      {
-        "name":"Global Cinemas",
-        "location":"Weija",
-        "image":""
-      },
-      {
-        "name":"Silver Bird",
-        "location":"Accra",
-        "image":""
-      },
-      {
-        "name":"Kumasi Cinema",
-        "location":"Kumasi",
-        "image":""
-      },
-      {
-        "name":"Silver Bird",
-        "location":"Weija",
-        "image":""
-      }
-    ]
+    this.getAllHouses()
 
 
     this.movies=[
@@ -77,6 +57,16 @@ export class HomePage {
     this.navCtrl.push(ViewOneCinemaMoviesPage,{'house':house})
 
     console.log("house", house)
+  }
+
+  getAllHouses(){
+    return this.http.get("http://localhost:27036/api/House/GetAllHouses")
+    .map(res=>res.json())
+    .subscribe(data =>{
+     
+      this.houses = data
+      console.log("all houses",this.houses)
+    })
   }
 
 }

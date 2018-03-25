@@ -1,5 +1,8 @@
+import { BookingPage } from './../booking/booking';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { Http} from '@angular/http';
 
 /**
  * Generated class for the ViewOneCinemaMoviePage page.
@@ -15,25 +18,44 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ViewOneCinemaMoviePage {
 
+  times:any
   movieToBeDisplayed:any
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log('ionViewDidLoad ViewOneCinemaMoviePage', this.navParams.get('movieTobeViewed'))
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http) {
    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewOneCinemaMoviePage');
 
+    this.movieToBeDisplayed = this.navParams.get('movieTobeViewed')
+
+    console.log('From Previous in var',  this.movieToBeDisplayed)
+
+    //if(this.movieToBeDisplayed==null||this.movieToBeDisplayed=='undefined'){
+      if(this.movieToBeDisplayed.MovieId){
+        //alert("not null")
+        this.getTimesOFMovies(this.movieToBeDisplayed.MovieId)
+      }
+    
+   
   }
 
-  ionViewWillLoad(){
-    console.log("holla")
 
+  getTimesOFMovies(movieId){
+    return this.http.get("http://localhost:27036/api/Movie/GetMovieTime?movieId="+movieId)
+    .map(res=>res.json())
+    .subscribe(data =>{
+     
+      this.times = data
+      console.log("sands of time",this.times)
+    })
+  }
 
-    this.movieToBeDisplayed = this.navParams.get('movieTobeViewed')
-    console.log("movie from previous page", this.movieToBeDisplayed)
+  goToBook(movie){
+    this.navCtrl.push(BookingPage,{
+      'movieToBeDisplayed':movie
+    })
   }
 
 
